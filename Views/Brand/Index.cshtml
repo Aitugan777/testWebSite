@@ -1,0 +1,30 @@
+﻿@model DbSet<Brand>
+
+@{
+    ViewData["Title"] = "Марки автомобилей";
+}
+
+
+<div class="text-center">
+    <h1>@ViewData["Title"]</h1>
+    <table border="1">
+        <tr>
+            <td width="50">Id</td>
+            <td width="150">Марка</td>
+            <td width="150"></td>
+        </tr>
+        @{
+            foreach (Brand brand in Model)
+            {
+                    <tr>
+                        <td width="50">@brand.Id</td>
+                        <td width="150">@brand.Name</td>
+                        <td width="150"><a asp-controller="Brand" asp-action="Edit" asp-route-id="@brand.Id">Редактировать</a></td>
+                        <td width="150"><a asp-controller="Brand" asp-action="DeleteBrand" asp-route-id="@brand.Id">Удалить</a></td>
+                    </tr>
+            }
+        }
+
+    </table>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Brand" asp-action="Edit">Добавить новую марку.</a>
+</div>

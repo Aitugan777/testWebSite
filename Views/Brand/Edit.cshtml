@@ -1,0 +1,22 @@
+﻿@model Brand
+
+@{
+    ViewData["Title"] = "Добавление/редактирование марки автомобиля";
+}
+
+
+<div class="text-center">
+    <h1>@ViewData["Title"]</h1>
+    
+    <form  method="post" asp-controller="Brand" asp-action="GetDataFromViewField" asp-route-id="@Model.Id">
+    <table border="1">
+        <tr>
+            <td width="50">Имя</td>
+            <td width="200"><input width="200" type="text" name="brandName" value="@Model.Name" /></td>
+        </tr>
+        <tr>
+            <td width="300"><input type="submit" value="Сохранить" /></td>
+        </tr>
+    </table>
+    </form>
+</div>
