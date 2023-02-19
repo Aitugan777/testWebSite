@@ -1,41 +1,45 @@
-﻿@model AllBrandsAndModels
+﻿@model DbSet<Brand>
 
 @{
-    ViewData["Title"] = "Все марки и модели автомобилей";
+    ViewData["Title"] = "Все модели марки " + ViewBag.brandName;
 }
 
 
 <div class="text-center">
     <h1>@ViewData["Title"]</h1>
-    <table border="1">
-        @{
-            foreach (Brand b in Model.Brands)
-            {
-                <tr>
-                    <td width="50">Марка</td>
-                    <td width="150">@b.Name</td>
-                </tr>
-                for (int i = 0; i < Model.Models.Count; i++)
+
+    <form class="form-group" method="post" asp-controller="AllBrandsAndModels" asp-action="Index">
+        <select name="brandId" class="form-control">
+            <option value="">Пожалуйста, выберите марку!</option>
+            @{
+                foreach (Brand brand in Model)
                 {
-                    if (Model.Models[i].BrandId == b.Id)
-                    {
-                        if (i == 0)
-                        {
-                            <tr>
-                                <td width="50">Модели:</td>
-                                <td width="50">@Model.Models[i].Name</td>
-                            </tr>
-                        }
-                        else
-                        {
-                            <tr>
-                                <td width="50"></td>
-                                <td width="150">@Model.Models[i].Name</td>
-                            </tr>
-                        }
-                    }
+                    <option value="@brand.Id">@brand.Name</option>
                 }
             }
-        }
-    </table>
+        </select>
+        <input type="submit" class="btn btn-primary" value="Показать модели"/>
+    </form>
 </div>
+
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+              <th scope="col">Модель</th>
+              <th scope="col">Активна</th>
+            </tr>
+        </thead>
+        <tbody>
+        @{
+            foreach (Model m in ViewBag.models)
+            {
+                string active = m.Active ? "Да" : "Нет";
+                <tr>
+                    <td>@m.Name</td>
+                    <td>@active</td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>

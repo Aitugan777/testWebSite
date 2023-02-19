@@ -7,30 +7,37 @@
 
 <div class="text-center">
     <h1>@ViewData["Title"]</h1>
-    <table border="1">
-        <tr>
-            <td width="50">Id</td>
-            <td width="150">Модель</td>
-            <td width="150">Марка</td>
-            <td width="150"></td>
-            <td width="150"></td>
-        </tr>
-        @{
-            foreach (Model m in Model)
-            {
-                string brandName = "-";
-                if (Tools.GetBrand(m.BrandId) != null)
-                    brandName = Tools.GetBrand(m.BrandId).Name;
-                <tr>
-                    <td width="50">@m.Id</td>
-                    <td width="150">@m.Name</td>
-                    <td width="150">@brandName</td>
-                    <td width="150"><a asp-controller="Model" asp-action="Edit" asp-route-id="@m.Id">Редактировать</a></td>
-                    <td width="150"><a asp-controller="Model" asp-action="DeleteModel" asp-route-id="@m.Id">Удалить</a></td>
-                </tr>
-            }
-        }
 
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+              <th scope="col">Ид</th>
+              <th scope="col">Модель</th>
+              <th scope="col">Марка</th>
+              <th scope="col">Активна</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (Model m in Model)
+                {
+                    string brandName = "-";
+                    if (Tools.GetBrand(m.BrandId) != null)
+                        brandName = Tools.GetBrand(m.BrandId).Name;
+                    string active = m.Active ? "Да" : "Нет";
+                    <tr>
+                        <td>@m.Id</td>
+                        <td>@m.Name</td>
+                        <td>@brandName</td>
+                        <td>@active</td>
+                        <td><a asp-controller="Model" asp-action="Edit" asp-route-id="@m.Id">Редактировать</a></td>
+                        <td><a asp-controller="Model" asp-action="DeleteModel" asp-route-id="@m.Id">Удалить</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
     </table>
     <a class="nav-link text-dark" asp-area="" asp-controller="Model" asp-action="Edit">Добавить новую модель.</a>
 </div>

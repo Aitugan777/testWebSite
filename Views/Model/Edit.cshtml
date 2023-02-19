@@ -7,20 +7,22 @@
 
 <div class="text-center">
     <h1>@ViewData["Title"]</h1>
-    
-    <form  method="post" asp-controller="Model" asp-action="GetDataFromViewField" asp-route-id="@Model.Id">
-    <table border="1">
-        <tr>
-            <td width="50">Имя</td>
-            <td width="200"><input width="200" type="text" name="modelName" value="@Model.Name" /></td>
-        </tr>
-        <tr>
-            <td width="50">Ид Марки</td>
-            <td width="200"><input width="200" type="text" name="brandId" value="@Model.BrandId" /></td>
-        </tr>
-        <tr>
-            <td width="300"><input type="submit" value="Сохранить" /></td>
-        </tr>
-    </table>
+
+    <form class="form-group" method="post" asp-controller="Model" asp-action="GetDataFromViewField" asp-route-id="@Model.Id">
+        <input class="form-control" type="text" name="modelName" value="@Model.Name" placeholder="Введите модель..."/>
+        <select name="brandId" class="form-control">
+            <option value="">Пожалуйста, выберите марку!</option>
+            @{
+                foreach (Brand brand in ViewBag.Brands)
+                {
+                    <option value="@brand.Id">@brand.Name</option>
+                }
+            }
+        </select>
+        <label class="form-control">
+            @Html.CheckBox("active", Model.Active)
+            Активный
+        </label>
+        <input type="submit" class="btn btn-primary" value="Сохранить"/>
     </form>
 </div>

@@ -10,11 +10,13 @@ namespace TestWebSite.Controllers
     {
         public IActionResult Index()
         {
+
             return View(new DataContext().Models);
         }
 
         public IActionResult Edit(int id)
         {
+            ViewBag.Brands = new DataContext().Brands;
             Model model = Tools.GetModel(id);
             if (model == null)
             {

@@ -8,15 +8,12 @@
 <div class="text-center">
     <h1>@ViewData["Title"]</h1>
     
-    <form  method="post" asp-controller="Brand" asp-action="GetDataFromViewField" asp-route-id="@Model.Id">
-    <table border="1">
-        <tr>
-            <td width="50">Имя</td>
-            <td width="200"><input width="200" type="text" name="brandName" value="@Model.Name" /></td>
-        </tr>
-        <tr>
-            <td width="300"><input type="submit" value="Сохранить" /></td>
-        </tr>
-    </table>
+    <form class="form-group" method="post" asp-controller="Brand" asp-action="GetDataFromViewField" asp-route-id="@Model.Id">
+        <input class="form-control" type="text" name="brandName" value="@Model.Name" placeholder="Введите марку..."/>
+        <label class="form-control">
+            @Html.CheckBox("active", Model.Active)
+            Активный
+        </label>
+        <input type="submit" class="btn btn-primary" value="Сохранить"/>
     </form>
 </div>

@@ -22,5 +22,14 @@ namespace TestWebSite.Repository
             return null;
         }
 
+        public static List<Model> GetModelsBrand(int brandId)
+        {
+            List<Model> list = new List<Model>();
+            foreach (Model model in new DataContext().Models)
+                if (model.BrandId == brandId)
+                    list.Add(model);
+            return list;
+        }
+
     }
 }
