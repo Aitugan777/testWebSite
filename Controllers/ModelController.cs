@@ -20,7 +20,7 @@ namespace TestWebSite.Controllers
             Model model = Tools.GetModel(id);
             if (model == null)
             {
-                return View(new Model() { Name = "Модель", Active = true, BrandId = 0 });
+                return View(new Model() { Name = "", Active = true, BrandId = 0 });
             }
             return View(model);
         }

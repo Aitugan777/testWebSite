@@ -19,7 +19,7 @@ namespace TestWebSite.Controllers
             Brand brand = Tools.GetBrand(id);
             if (brand == null)
             {
-                return View(new Brand() { Name = "Марка", Active = true });
+                return View(new Brand() { Name = "", Active = true });
             }
             return View(brand);
         }
